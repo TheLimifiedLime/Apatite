@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Apatite Config",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "config": {
+      "description": "The configuration for the Apatite instance",
+      "type": ["object"],
+      "properties": {
+        "forceThemeMode": {
+          "description": "Overrides the browser's preferred color scheme when theming Apatite in fallback mode",
+          "type": ["string"],
+          "enum": ["light", "dark"]
+        },
+        "customCSS": {
+          "description": "Provides custom CSS to inject when theming Apatite in fallback mode",
+          "type": "string"
+        }
+      }
+    },
+    "schedules": {
+      "description": "User provided schedules for processing",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Schedule name for use in the UI",
+            "type": "string",
+            "minLength": 1
+          },
+          "dateRangeValid": {
+            "description": "Date range used to determine whether the schedule is valid. Can be used to set a schedule for only a few day(s). If absent them it is assumed the schedule is always valid",
+            "type": "object",
+            "properties": {
+              "start": {
+                "description": "Starting date",
+                "type": "string",
+                "format": "date"
+              },
+              "end": {
+                "description": "Ending date",
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "reoccurrence": {
+            "description": "How often to repeat the schedule. E.g repeat only Monday-Friday, ",
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "Type of reoccurrence, whether daily (select days of week), monthly (select days of month), or yearly (select days of the year)",
+                "type": "string",
+                "enum": ["daily", "monthly", "yearly"]
+              },
+              "value": {}
+              
+            }
+          }
+        }
+      }
+    }
+  }
+}
