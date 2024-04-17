@@ -1,26 +1,27 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Apatite Config",
+  "description": "Defines the configuration parameters and schedules for the Apatite instance.",
   "type": "object",
   "version": "1.0.0",
   "properties": {
     "config": {
-      "description": "The configuration for the Apatite instance",
+      "description": "Contains the settings for customizing the Apatite instance.",
       "type": ["object"],
       "properties": {
         "forceThemeMode": {
-          "description": "Overrides the browser's preferred color scheme when theming Apatite in fallback mode",
+          "description": "Specifies the theme mode to use, overriding the browser's preferred color scheme, when Apatite is in fallback mode.",
           "type": ["string"],
           "enum": ["light", "dark"]
         },
         "customCSS": {
-          "description": "Provides custom CSS to inject when theming Apatite in fallback mode",
+          "description": "Specifies custom CSS to be applied for theming when Apatite is in fallback mode.",
           "type": "string"
         }
       }
     },
     "schedules": {
-      "description": "User provided schedules for processing",
+      "description": "Array of schedules provided by the user for processing.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -32,7 +33,7 @@
             "minLength": 1
           },
           "dateRangeValid": {
-            "description": "Date range used to determine whether the schedule is valid. Can be used to set a schedule for only a few day(s). If absent them it is assumed the schedule is always valid",
+            "description": "Specifies the date range during which the schedule is valid. If not provided, the schedule is assumed to be always valid.",
             "type": "object",
             "properties": {
               "start": {
@@ -49,7 +50,7 @@
             }
           },
           "reoccurrence": {
-            "description": "How often to repeat the schedule. E.g repeat only Monday-Friday, ",
+            "description": "Defines the frequency of schedule repetition. For example, a schedule can be set to repeat only on weekdays (Monday to Friday).",
             "type": "object",
             "properties": {
               "type": {
@@ -57,7 +58,12 @@
                 "type": "string",
                 "enum": ["daily", "monthly", "yearly"]
               },
-              "value": {},
+              "value": {
+                "description": "Specifies the zero indexed value for the reoccurrence",
+                "type": "array",
+                "items": "number"
+                // TODO: ADD DYNAMIC maxNumber for the numbers in the array based on type (eg limit=1 for daily, limit=31 for monthly, etc)
+              },
               "required": ["type", "value"]
             }
           }
