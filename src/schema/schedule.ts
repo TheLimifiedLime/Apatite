@@ -36,6 +36,7 @@ const ScheduleSchema = z.object({
         friendlyName: z.string().optional(),
         startTime: z.string().time(),
         endTime: z.string().time(),
+        url: z.string().url()
       })
     )
     .describe(
@@ -43,5 +44,6 @@ const ScheduleSchema = z.object({
     )
     .nonempty(),
 });
+
 
 export default ScheduleSchema;
