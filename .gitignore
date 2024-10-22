@@ -4,6 +4,3 @@ node_modules
 # Bundler
 dist
 .parcel-cache
-
-# Miscellaneous
-js/schedules.js
