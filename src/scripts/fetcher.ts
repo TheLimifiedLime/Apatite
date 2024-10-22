@@ -4,12 +4,12 @@ import ConfigSchema from "../schema/config";
 
 const urlParameters = new URLSearchParams(window.location.search);
 
-function fetchSchedules(): (typeof ScheduleSchema)[] | undefined {
+function fetchSchedules(): (typeof ScheduleSchema)[] | [] {
   // Get value of "schedules" query parameter
   const schedulesParameter = urlParameters.get("schedules");
   if (!schedulesParameter) {
     console.error("Unable to find schedules in URL.");
-    return;
+    return [];
   }
 
   // URL Decode and parse the schedules parameter + validate data type
@@ -19,12 +19,12 @@ function fetchSchedules(): (typeof ScheduleSchema)[] | undefined {
     parsedSchedules = JSON.parse(parsedSchedules);
   } catch (error) {
     console.error("Failed to parse schedules.", error);
-    return;
+    return [];
   }
 
   if (!Array.isArray(parsedSchedules)) {
     console.error("Unable to find any schedules.");
-    return;
+    return [];
   }
 
   // Validate each schedule item against the schema and then filter out invalid items
@@ -34,7 +34,7 @@ function fetchSchedules(): (typeof ScheduleSchema)[] | undefined {
         return ScheduleSchema.parse(scheduleItem);
       } catch (error) {
         console.error("Invalid schedule provided.", error);
-        return;
+        return [];
       }
     })
     .filter((scheduleItem) => scheduleItem !== undefined);
