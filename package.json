@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "source": "src/index.html",
   "scripts": {
-    "start": "npx parcel",
+    "dev": "npx parcel",
     "build": "npx parcel build"
   },
   "devDependencies": {
