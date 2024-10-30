@@ -1,10 +1,13 @@
-import z from "zod";
-import ScheduleSchema from "../schema/schedule";
-import ConfigSchema from "../schema/config";
+import { ScheduleSchema, Schedule } from "../schema/schedule";
+import { ConfigSchema, Config } from "../schema/config";
 
 const urlParameters = new URLSearchParams(window.location.search);
 
-function fetchSchedules(): (typeof ScheduleSchema)[] | [] {
+/**
+ * Fetches and validates schedules from the URL parameters.
+ * @returns {Schedule[]} An array of schedules passed to Apatite.
+ */
+function fetchSchedules(): Schedule[] {
   // Get value of "schedules" query parameter
   const schedulesParameter = urlParameters.get("schedules");
   if (!schedulesParameter) {
@@ -29,20 +32,26 @@ function fetchSchedules(): (typeof ScheduleSchema)[] | [] {
 
   // Validate each schedule item against the schema and then filter out invalid items
   parsedSchedules = parsedSchedules
-    .map((scheduleItem) => {
+    .map((scheduleEntry) => {
       try {
-        return ScheduleSchema.parse(scheduleItem);
+        return ScheduleSchema.parse(scheduleEntry);
       } catch (error) {
         console.error("Invalid schedule provided.", error);
-        return [];
+        return undefined;
       }
     })
-    .filter((scheduleItem) => scheduleItem !== undefined);
+    .filter(
+      (scheduleItem): scheduleItem is Schedule => scheduleItem !== undefined
+    );
 
   return parsedSchedules;
 }
 
-function fetchConfig(): z.infer<typeof ConfigSchema> | undefined {
+/**
+ * Fetches and validates the config from the URL parameters.
+ * @returns {Config | undefined} The config object passed to Apatite.
+ */
+function fetchConfig(): Config | undefined {
   const configParameter = urlParameters.get("config");
 
   if (!configParameter) return;
