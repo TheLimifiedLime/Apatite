@@ -10,4 +10,5 @@ const ConfigSchema = z
   .describe("Customize the settings for customizing the Apatite instance.")
   .optional();
 
-export default ConfigSchema;
+export { ConfigSchema };
+export type Config = z.infer<typeof ConfigSchema>;
