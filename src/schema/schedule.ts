@@ -18,7 +18,7 @@ const ScheduleSchema = z.object({
   reoccurrence: z
     .object({
       type: z
-        .enum(["daily", "monthly", "yearly"])
+        .enum(["weekly", "monthly", "annually"])
         .describe(
           "Type of reoccurrence, whether daily (select days of week), monthly (select days of month), or yearly (select days of the year)"
         ),
