@@ -46,6 +46,7 @@ function reoccurrenceFilter(): Schedule[] {
   return schedules.filter((schedule: Schedule) => {
     if (!schedule.reoccurrence) return true;
 
+    // Check if the current date matches the reoccurrence pattern
     switch (schedule.reoccurrence.type) {
       case "weekly":
         return schedule.reoccurrence.value.includes(new Date().getDay());
@@ -59,8 +60,6 @@ function reoccurrenceFilter(): Schedule[] {
               (1000 * 60 * 60 * 24)
           )
         );
-      default:
-        return false;
     }
   });
 }
