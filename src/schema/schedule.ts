@@ -15,7 +15,7 @@ const ScheduleSchema = z.object({
       "The date range during which the schedule is valid. If not provided, the schedule is assumed to be always valid."
     )
     .optional(),
-  reoccurance: z
+  reoccurrence: z
     .object({
       type: z
         .enum(["daily", "monthly", "yearly"])
