@@ -32,3 +32,35 @@ function dateRangeFilter(): Schedule[] {
     return true;
   });
 }
+
+/**
+ * Filters the schedules based on their reoccurrence type and value.
+ *
+ * This function iterates over the list of schedules and applies the following filters:
+ * - If the schedule does not have a reoccurrence type, it is included.
+ * - If the schedule has a reoccurrence type and value, it checks if the current date matches the reoccurrence pattern.
+ *
+ * @returns {Schedule[]} The filtered list of schedules.
+ */
+function reoccurrenceFilter(): Schedule[] {
+  return schedules.filter((schedule: Schedule) => {
+    if (!schedule.reoccurrence) return true;
+
+    switch (schedule.reoccurrence.type) {
+      case "weekly":
+        return schedule.reoccurrence.value.includes(new Date().getDay());
+      case "monthly":
+        return schedule.reoccurrence.value.includes(new Date().getDate());
+      case "annually":
+        return schedule.reoccurrence.value.includes(
+          Math.floor(
+            (new Date().getTime() -
+              new Date(new Date().getFullYear(), 0, 0).getTime()) /
+              (1000 * 60 * 60 * 24)
+          )
+        );
+      default:
+        return false;
+    }
+  });
+}
