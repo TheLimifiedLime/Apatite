@@ -1,10 +1,6 @@
 import { ScheduleSchema, type Schedule } from "$lib/schema/schedule";
 import { ConfigSchema, type Config } from "$lib/schema/config";
 
-/**
- * Fetches and validates the config from the URL parameters.
- * @returns {Config | undefined} The config object passed to Apatite.
- */
 function fetchConfig(urlParameters: URLSearchParams): Config | undefined {
   const configParameter = urlParameters.get("config");
 
@@ -30,11 +26,9 @@ function fetchConfig(urlParameters: URLSearchParams): Config | undefined {
   }
 }
 
-/**
- * Fetches and validates schedules from the URL parameters.
- * @returns {Schedule[] | undefined} An array of schedules passed to Apatite or undefined if no schedules are found.
- */
-function fetchSchedules(urlParameters: URLSearchParams): Schedule[] | undefined {
+function fetchSchedules(
+  urlParameters: URLSearchParams
+): Schedule[] | undefined {
   // Get value of "schedules" query parameter
   const schedulesParameter = urlParameters.get("schedules");
   if (!schedulesParameter) {
