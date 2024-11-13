@@ -8,8 +8,22 @@ const ScheduleSchema = z.object({
     .optional(),
   dateRangeValid: z
     .object({
-      start: z.string().describe("A starting date.").date().optional(),
-      end: z.string().describe("A ending date.").date().optional(),
+      start: z
+        .string()
+        .describe("A starting date.")
+        .date()
+        .transform((string) => {
+          return new Date(string + "T00:00:00");
+        })
+        .optional(),
+      end: z
+        .string()
+        .describe("A ending date.")
+        .date()
+        .transform((string) => {
+          return new Date(string + "T00:00:00");
+        })
+        .optional(),
     })
     .describe(
       "The date range during which the schedule is valid. If not provided, the schedule is assumed to be always valid."
