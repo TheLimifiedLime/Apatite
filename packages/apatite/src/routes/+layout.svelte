@@ -1,6 +1,89 @@
 <script lang="ts">
-	import '../app.css';
-	let { children } = $props();
+  import "../app.css";
+  let { children } = $props();
+
+  import { StyleFromScheme } from "m3-svelte";
 </script>
 
 {@render children()}
+
+<StyleFromScheme
+  lightScheme={{
+    primary: 4278217321,
+    onPrimary: 4294967295,
+    primaryContainer: 4288475631,
+    onPrimaryContainer: 4278210639,
+    inversePrimary: 4286633427,
+    secondary: 4283065186,
+    onSecondary: 4294967295,
+    secondaryContainer: 4291619047,
+    onSecondaryContainer: 4281486155,
+    tertiary: 4283129980,
+    onTertiary: 4294967295,
+    tertiaryContainer: 4292011263,
+    onTertiaryContainer: 4281550947,
+    error: 4290386458,
+    onError: 4294967295,
+    errorContainer: 4294957782,
+    onErrorContainer: 4287823882,
+    background: 4294245370,
+    onBackground: 4279639324,
+    surface: 4294245370,
+    onSurface: 4279639324,
+    surfaceVariant: 4292535779,
+    onSurfaceVariant: 4282337608,
+    inverseSurface: 4281020977,
+    inverseOnSurface: 4293718769,
+    outline: 4285495672,
+    outlineVariant: 4290693576,
+    shadow: 4278190080,
+    scrim: 4278190080,
+    surfaceDim: 4292205530,
+    surfaceBright: 4294245370,
+    surfaceContainerLowest: 4294967295,
+    surfaceContainerLow: 4293916148,
+    surfaceContainer: 4293521390,
+    surfaceContainerHigh: 4293126632,
+    surfaceContainerHighest: 4292732131,
+    surfaceTint: 4278217321,
+  }}
+  darkScheme={{
+    primary: 4286633427,
+    onPrimary: 4278204214,
+    primaryContainer: 4278210639,
+    onPrimaryContainer: 4288475631,
+    inversePrimary: 4278217321,
+    secondary: 4289776843,
+    onSecondary: 4279973172,
+    secondaryContainer: 4281486155,
+    onSecondaryContainer: 4291619047,
+    tertiary: 4289906920,
+    onTertiary: 4279972427,
+    tertiaryContainer: 4281550947,
+    onTertiaryContainer: 4292011263,
+    error: 4294948011,
+    onError: 4285071365,
+    errorContainer: 4287823882,
+    onErrorContainer: 4294957782,
+    background: 4279112980,
+    onBackground: 4292732131,
+    surface: 4279112980,
+    onSurface: 4292732131,
+    surfaceVariant: 4282337608,
+    onSurfaceVariant: 4290693576,
+    inverseSurface: 4292732131,
+    inverseOnSurface: 4281020977,
+    outline: 4287140754,
+    outlineVariant: 4282337608,
+    shadow: 4278190080,
+    scrim: 4278190080,
+    surfaceDim: 4279112980,
+    surfaceBright: 4281612858,
+    surfaceContainerLowest: 4278783759,
+    surfaceContainerLow: 4279639324,
+    surfaceContainer: 4279902496,
+    surfaceContainerHigh: 4280625963,
+    surfaceContainerHighest: 4281284150,
+    surfaceTint: 4286633427,
+  }}
+/>
