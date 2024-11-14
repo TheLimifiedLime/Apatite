@@ -1,30 +1,22 @@
-import { Schedule } from "../schema/schedule";
-import { schedules } from "./fetcher";
+import type { Schedule } from "$lib/schema/schedule";
 
-function dateRangeFilter(): Schedule[] {
-  return schedules.filter((schedule: Schedule) => {
+function filter(schedules: Schedule[]) {
+  let filteredSchedules;
+  // Filter out schedules if the current date is not within the date range
+  filteredSchedules = schedules.filter((schedule: Schedule) => {
     if (!schedule.dateRangeValid) return true;
 
-    // Assign variables only if the dates exist
-    const startDate = schedule.dateRangeValid.start
-      ? new Date(schedule.dateRangeValid.start + "T00:00:00")
-      : null;
-    const endDate = schedule.dateRangeValid.end
-      ? new Date(schedule.dateRangeValid?.end + "T00:00:00")
-      : null;
+    const { start: startDate, end: endDate } = schedule.dateRangeValid;
 
-    // Filter out schedules that have not started yet
+    // Filter out schedules that have not started yet or that have ended
     if (startDate && startDate > new Date()) return false;
-
-    // Filter out schedules that have ended
     if (endDate && endDate < new Date()) return false;
 
     return true;
   });
-}
 
-function reoccurrenceFilter(): Schedule[] {
-  return schedules.filter((schedule: Schedule) => {
+  // Filter out schedules if the current date does not match the reoccurrence pattern
+  filteredSchedules = schedules.filter((schedule: Schedule) => {
     if (!schedule.reoccurrence) return true;
 
     // Check if the current date matches the reoccurrence pattern
@@ -44,3 +36,5 @@ function reoccurrenceFilter(): Schedule[] {
     }
   });
 }
+
+export { filter };
