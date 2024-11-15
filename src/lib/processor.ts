@@ -56,8 +56,6 @@ function calculateScheduleItem(schedules: Schedule[]): ScheduleItem {
     return true;
   });
 
-  console.log(validScheduleItems);
-
   return validScheduleItems[0];
 }
 
