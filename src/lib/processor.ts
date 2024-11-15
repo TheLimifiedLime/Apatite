@@ -1,4 +1,4 @@
-import type { Schedule } from "$lib/schema/schedule";
+import type { Schedule, ScheduleItem } from "$lib/schema/schedule";
 
 function filter(schedules: Schedule[]): Schedule[] | null {
   let filteredSchedules;
@@ -39,4 +39,26 @@ function filter(schedules: Schedule[]): Schedule[] | null {
   return filteredSchedules.length > 0 ? filteredSchedules : null;
 }
 
-export { filter };
+function calculateScheduleItem(schedules: Schedule[]): ScheduleItem {
+  // Sort schedules by priority and return the first one
+  const prioritizedSchedule = schedules.sort((a, b) => {
+    return b.priority - a.priority;
+  })[0];
+
+  const validScheduleItems = prioritizedSchedule.items.filter((item) => {
+    const { startTime: start, endTime: end } = item;
+    const now = new Date();
+
+    // Filter out items that haven't started or ended yet
+    if (now < start) return false;
+    if (now > end) return false;
+
+    return true;
+  });
+
+  console.log(validScheduleItems);
+
+  return validScheduleItems[0];
+}
+
+export { filter, calculateScheduleItem };
