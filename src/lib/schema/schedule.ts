@@ -12,7 +12,7 @@ const ScheduleSchema = z.object({
       "Priority for the schedule in case there are multiple conflicting schedules."
     )
     .int()
-    .positive()
+    .nonnegative()
     .finite()
     .default(0)
     .optional(),
@@ -54,7 +54,7 @@ const ScheduleSchema = z.object({
           "Type of reoccurrence, whether daily (select days of week), monthly (select days of month), or yearly (select days of the year)"
         ),
       value: z
-        .array(z.number().nonnegative())
+        .array(z.number().int().nonnegative())
         .describe("Specifies the zero indexed value for the reoccurrence"),
     })
     .describe(
