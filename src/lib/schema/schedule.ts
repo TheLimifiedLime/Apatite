@@ -45,25 +45,24 @@ const ScheduleSchema = z.object({
     )
     .optional(),
   items: z
-    .array(
-      z.object({
-        friendlyName: z.string().optional(),
-        description: z.string().optional(),
-        startTime: z
-          .string()
-          .time()
-          .transform((time) => {
-            return new Date(time);
-          }),
-        endTime: z
-          .string()
-          .time()
-          .transform((time) => {
-            return new Date(time);
-          }),
-        url: z.string().url(),
-      })
-    )
+    .object({
+      friendlyName: z.string().optional(),
+      description: z.string().optional(),
+      startTime: z
+        .string()
+        .time()
+        .transform((time) => {
+          return new Date(time);
+        }),
+      endTime: z
+        .string()
+        .time()
+        .transform((time) => {
+          return new Date(time);
+        }),
+      url: z.string().url(),
+    })
+    .array()
     .describe(
       "Items to processes and used to determine which link to open. When used as a fallback, these are listed in order."
     )
