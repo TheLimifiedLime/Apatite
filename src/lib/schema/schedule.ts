@@ -49,8 +49,18 @@ const ScheduleSchema = z.object({
       z.object({
         friendlyName: z.string().optional(),
         description: z.string().optional(),
-        startTime: z.string().time(),
-        endTime: z.string().time(),
+        startTime: z
+          .string()
+          .time()
+          .transform((time) => {
+            return new Date(time);
+          }),
+        endTime: z
+          .string()
+          .time()
+          .transform((time) => {
+            return new Date(time);
+          }),
         url: z.string().url(),
       })
     )
