@@ -6,6 +6,23 @@ const ScheduleSchema = z.object({
     .describe("Schedule name for use in the UI.")
     .default("Unnamed Schedule")
     .optional(),
+  priority: z
+    .number()
+    .describe(
+      "Priority for the schedule in case there are multiple conflicting schedules."
+    )
+    .int()
+    .positive()
+    .finite()
+    .default(0)
+    .optional(),
+  fallback: z
+    .boolean()
+    .describe(
+      "Whether to be able to use this schedule as a fallback. If more than than one schedule is marked as a fallback, priority is used to determine which schedule to use."
+    )
+    .default(false)
+    .optional(),
   dateRangeValid: z
     .object({
       start: z
