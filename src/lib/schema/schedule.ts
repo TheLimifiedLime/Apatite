@@ -69,13 +69,13 @@ const ScheduleSchema = z.object({
         .string()
         .time()
         .transform((time) => {
-          return new Date(time);
+          return new Date(`${new Date().toDateString()} ${time}`);
         }),
       endTime: z
         .string()
         .time()
         .transform((time) => {
-          return new Date(time);
+          return new Date(`${new Date().toDateString()} ${time}`);
         }),
       url: z.string().url(),
     })
