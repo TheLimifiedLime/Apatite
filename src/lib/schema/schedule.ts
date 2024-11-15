@@ -4,8 +4,7 @@ const ScheduleSchema = z.object({
   name: z
     .string()
     .describe("Schedule name for use in the UI.")
-    .default("Unnamed Schedule")
-    .optional(),
+    .default("Unnamed Schedule"),
   priority: z
     .number()
     .describe(
@@ -14,15 +13,13 @@ const ScheduleSchema = z.object({
     .int()
     .nonnegative()
     .finite()
-    .default(0)
-    .optional(),
+    .default(0),
   fallback: z
     .boolean()
     .describe(
       "Whether to be able to use this schedule as a fallback. If more than than one schedule is marked as a fallback, priority is used to determine which schedule to use."
     )
-    .default(false)
-    .optional(),
+    .default(false),
   dateRangeValid: z
     .object({
       start: z
@@ -87,4 +84,6 @@ const ScheduleSchema = z.object({
 });
 
 export { ScheduleSchema };
+
 export type Schedule = z.infer<typeof ScheduleSchema>;
+export type ScheduleItem = z.infer<typeof ScheduleSchema>["items"][0];
