@@ -39,12 +39,13 @@ function filter(schedules: Schedule[]): Schedule[] | null {
   return filteredSchedules.length > 0 ? filteredSchedules : null;
 }
 
-function calculateScheduleItem(schedules: Schedule[]): ScheduleItem {
+function calculateScheduleItem(schedules: Schedule[]): ScheduleItem | null {
   // Sort schedules by priority and return the first one
   const prioritizedSchedule = schedules.sort((a, b) => {
     return b.priority - a.priority;
   })[0];
 
+  // Filter out items that haven't started or ended yet
   const validScheduleItems = prioritizedSchedule.items.filter((item) => {
     const { startTime: start, endTime: end } = item;
     const now = new Date();
@@ -56,7 +57,35 @@ function calculateScheduleItem(schedules: Schedule[]): ScheduleItem {
     return true;
   });
 
-  return validScheduleItems[0];
+  // Warn if there are multiple valid schedule items for the current time
+  if (validScheduleItems.length > 1) {
+    // TODO: Add UI toast notification
+    console.warn(
+      "Conflicting schedule items valid for the current time. This is not recommended. Using the first one."
+    );
+  }
+
+  return validScheduleItems.length > 0 ? validScheduleItems[0] : null;
 }
 
-export { filter, calculateScheduleItem };
+function calculateFallbackSchedule(schedules: Schedule[]): Schedule | null {
+  // Filter out schedules that can't be used as fallbacks
+  const fallbackEnabledSchedules = schedules.filter(
+    (schedule) => schedule.fallback
+  );
+  if (fallbackEnabledSchedules.length === 0) return null;
+
+  if (fallbackEnabledSchedules.length > 1) {
+    // TODO: Add UI toast notification
+    console.warn(
+      "Multiple fallback schedules found. This is not recommended. Using the one with the highest priority."
+    );
+  }
+
+  // Sort fallback enabled schedules by priority and return the first one
+  return fallbackEnabledSchedules.sort((a, b) => {
+    return b.priority - a.priority;
+  })[0];
+}
+
+export { filter, calculateScheduleItem, calculateFallbackSchedule };
