@@ -1,7 +1,7 @@
 import { ScheduleSchema, type Schedule } from "$lib/schema/schedule";
 import { ConfigSchema, type Config } from "$lib/schema/config";
 
-function fetchConfig(urlParameters: URLSearchParams): Config | undefined {
+function fetchConfig(urlParameters: URLSearchParams): Config | null {
   const configParameter = urlParameters.get("config");
 
   if (!configParameter) return;
@@ -28,12 +28,12 @@ function fetchConfig(urlParameters: URLSearchParams): Config | undefined {
 
 function fetchSchedules(
   urlParameters: URLSearchParams
-): Schedule[] | undefined {
+): Schedule[] | null {
   // Get value of "schedules" query parameter
   const schedulesParameter = urlParameters.get("schedules");
   if (!schedulesParameter) {
     console.error("Unable to find schedules in URL.");
-    return undefined;
+    return null;
   }
 
   // URL Decode and parse the schedules parameter + validate data type
@@ -43,12 +43,12 @@ function fetchSchedules(
     parsedSchedules = JSON.parse(parsedSchedules);
   } catch (error) {
     console.error("Failed to parse schedules.", error);
-    return undefined;
+    return null;
   }
 
   if (!Array.isArray(parsedSchedules)) {
     console.error("Unable to find any schedules.");
-    return undefined;
+    return null;
   }
 
   // Validate each schedule item against the schema and then filter out invalid items
@@ -58,14 +58,14 @@ function fetchSchedules(
         return ScheduleSchema.parse(scheduleEntry);
       } catch (error) {
         console.error("Invalid schedule provided.", error);
-        return undefined;
+        return null;
       }
     })
     .filter(
       (scheduleItem): scheduleItem is Schedule => scheduleItem !== undefined
     );
 
-  return parsedSchedules.length > 0 ? parsedSchedules : undefined;
+  return parsedSchedules.length > 0 ? parsedSchedules : null;
 }
 
 export { fetchConfig, fetchSchedules };
