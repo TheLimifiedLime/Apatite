@@ -1,6 +1,6 @@
 import type { Schedule } from "$lib/schema/schedule";
 
-function filter(schedules: Schedule[]) {
+function filter(schedules: Schedule[]): Schedule[] | null {
   let filteredSchedules;
   // Filter out schedules if the current date is not within the date range
   filteredSchedules = schedules.filter((schedule: Schedule) => {
@@ -35,6 +35,8 @@ function filter(schedules: Schedule[]) {
         );
     }
   });
+
+  return filteredSchedules.length > 0 ? filteredSchedules : null;
 }
 
 export { filter };
