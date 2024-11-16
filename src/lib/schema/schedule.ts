@@ -60,7 +60,7 @@ const ScheduleSchema = z.object({
     .optional(),
   items: z
     .object({
-      friendlyName: z.string().optional(),
+      name: z.string().optional(),
       description: z.string().optional(),
       startTime: z
         .string()
