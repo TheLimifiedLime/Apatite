@@ -1,11 +1,11 @@
 import type { PageLoad } from "./$types";
 import { redirect } from "@sveltejs/kit";
-import { fetchConfig, fetchSchedules } from "$lib/fetcher";
+import { fetchConfig, fetchSchedules } from "$lib/utilities/fetcher";
 import {
   filter,
   calculateScheduleItem,
   calculateFallbackSchedule,
-} from "$lib/processor";
+} from "$lib/utilities/processor";
 
 export const load: PageLoad = ({ url }) => {
   const config = fetchConfig(url.searchParams);
