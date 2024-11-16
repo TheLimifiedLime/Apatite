@@ -77,6 +77,128 @@ export default {
       "40": "40px",
       "48": "48px",
     },
+    fontSize: {
+      "display-large": [
+        "57pt",
+        {
+          lineHeight: "64pt",
+          letterSpacing: "-0.25pt",
+          fontWeight: "400",
+        },
+      ],
+      "display-medium": [
+        "45pt",
+        {
+          lineHeight: "52pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "display-small": [
+        "36pt",
+        {
+          lineHeight: "44pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "headline-large": [
+        "32pt",
+        {
+          lineHeight: "40pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "headline-medium": [
+        "28pt",
+        {
+          lineHeight: "36pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "headline-small": [
+        "24pt",
+        {
+          lineHeight: "32pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "title-large": [
+        "22pt",
+        {
+          lineHeight: "28pt",
+          letterSpacing: "0pt",
+          fontWeight: "400",
+        },
+      ],
+      "title-medium": [
+        "16pt",
+        {
+          lineHeight: "24pt",
+          letterSpacing: ".15pt",
+          fontWeight: "400",
+        },
+      ],
+      "title-small": [
+        "14pt",
+        {
+          lineHeight: "20pt",
+          letterSpacing: ".1pt",
+          fontWeight: "400",
+        },
+      ],
+      "body-large": [
+        "16pt",
+        {
+          lineHeight: "24pt",
+          letterSpacing: ".5pt",
+          fontWeight: "400",
+        },
+      ],
+      "body-medium": [
+        "14pt",
+        {
+          lineHeight: "20pt",
+          letterSpacing: ".25pt",
+          fontWeight: "400",
+        },
+      ],
+      "body-small": [
+        "12pt",
+        {
+          lineHeight: "16pt",
+          letterSpacing: ".4pt",
+          fontWeight: "400",
+        },
+      ],
+      "label-large": [
+        "14pt",
+        {
+          lineHeight: "20pt",
+          letterSpacing: ".1pt",
+          fontWeight: "500",
+        },
+      ],
+      "label-medium": [
+        "12pt",
+        {
+          lineHeight: "16pt",
+          letterSpacing: ".5pt",
+          fontWeight: "500",
+        },
+      ],
+      "label-small": [
+        "11pt",
+        {
+          lineHeight: "16pt",
+          letterSpacing: ".5pt",
+          fontWeight: "500",
+        },
+      ],
+    },
     extend: {},
   },
 
