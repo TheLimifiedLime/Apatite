@@ -6,6 +6,11 @@
   let { config, fallback } = data;
 </script>
 
+<svelte:head>
+  <title>Apatite</title>
+  <!-- TODO: seo/meta tags -->
+</svelte:head>
+
 {#if fallback}
   <main class="grid grid-cols-1 p-16 gap-y-16">
     <h2 class="text-display-large text-center py-16">
