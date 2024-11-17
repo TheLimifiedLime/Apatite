@@ -3,21 +3,19 @@ import z from "zod";
 const ScheduleSchema = z.object({
   name: z
     .string()
-    .describe("Schedule name for use in the UI.")
-    .default("Unnamed Schedule"),
+    .default("Unnamed Schedule")
+    .describe("Schedule name for use in the UI."),
   priority: z
     .number()
-    .describe(
-      "Priority for the schedule in case there are multiple conflicting schedules."
-    )
     .int()
     .nonnegative()
     .finite()
-    .default(0),
+    .default(0)
+    .describe("Priority to use when conflicting schedules exist."),
   fallback: z
     .boolean()
     .describe(
-      "Whether to be able to use this schedule as a fallback. If more than than one schedule is marked as a fallback, priority is used to determine which schedule to use."
+      "Whether or not to use this schedule as a fallback. When more than one exists, the priority is used to make a selection."
     )
     .default(false),
   dateRangeValid: z
@@ -39,9 +37,7 @@ const ScheduleSchema = z.object({
         })
         .optional(),
     })
-    .describe(
-      "The date range during which the schedule is valid. If not provided, the schedule is assumed to be always valid."
-    )
+    .describe("The date range during which the schedule is valid.")
     .optional(),
   reoccurrence: z
     .object({
@@ -54,33 +50,45 @@ const ScheduleSchema = z.object({
         .array(z.number().int().nonnegative())
         .describe("Specifies the zero indexed value for the reoccurrence"),
     })
-    .describe(
-      "The frequency of schedule repetition. For example, a schedule can be set to repeat only on weekdays (Monday to Friday)."
-    )
+    .describe("The reoccurrence pattern in which the schedule is valid.")
     .optional(),
   items: z
     .object({
-      name: z.string().optional(),
-      description: z.string().optional(),
+      name: z.string().optional().describe("A name to display for the item."),
+      description: z
+        .string()
+        .optional()
+        .describe("A description for item to display."),
+      enabled: z
+        .boolean()
+        .default(true)
+        .describe(
+          "Used to disable specific items. They are still shown but in a disabled state."
+        ),
       startTime: z
         .string()
         .time()
         .transform((time) => {
           return new Date(`${new Date().toDateString()} ${time}`);
-        }),
+        })
+        .describe("When the time range of the item starts."),
       endTime: z
         .string()
         .time()
         .transform((time) => {
           return new Date(`${new Date().toDateString()} ${time}`);
-        }),
-      url: z.string().url(),
+        })
+        .describe("When the time range of the item ends."),
+      url: z
+        .string()
+        .url()
+        .describe("URL to redirect to when the item is triggered."),
     })
     .array()
+    .nonempty()
     .describe(
       "Items to processes and used to determine which link to open. When used as a fallback, these are listed in order."
-    )
-    .nonempty(),
+    ),
 });
 
 export { ScheduleSchema };
