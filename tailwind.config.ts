@@ -82,7 +82,6 @@ export default {
         "57px",
         {
           lineHeight: "64px",
-          letterSpacing: "-0.25px",
           fontWeight: "400",
         },
       ],
@@ -90,7 +89,6 @@ export default {
         "45px",
         {
           lineHeight: "52px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -98,7 +96,6 @@ export default {
         "36px",
         {
           lineHeight: "44px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -106,7 +103,6 @@ export default {
         "32px",
         {
           lineHeight: "40px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -114,7 +110,6 @@ export default {
         "28px",
         {
           lineHeight: "36px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -122,7 +117,6 @@ export default {
         "24px",
         {
           lineHeight: "32px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -130,7 +124,6 @@ export default {
         "22px",
         {
           lineHeight: "28px",
-          letterSpacing: "0px",
           fontWeight: "400",
         },
       ],
@@ -138,7 +131,6 @@ export default {
         "16px",
         {
           lineHeight: "24px",
-          letterSpacing: ".15px",
           fontWeight: "400",
         },
       ],
@@ -146,7 +138,6 @@ export default {
         "14px",
         {
           lineHeight: "20px",
-          letterSpacing: ".1px",
           fontWeight: "400",
         },
       ],
@@ -154,7 +145,6 @@ export default {
         "16px",
         {
           lineHeight: "24px",
-          letterSpacing: ".5px",
           fontWeight: "400",
         },
       ],
@@ -162,7 +152,6 @@ export default {
         "14px",
         {
           lineHeight: "20px",
-          letterSpacing: ".25px",
           fontWeight: "400",
         },
       ],
@@ -170,7 +159,6 @@ export default {
         "12px",
         {
           lineHeight: "16px",
-          letterSpacing: ".4px",
           fontWeight: "400",
         },
       ],
@@ -178,7 +166,6 @@ export default {
         "14px",
         {
           lineHeight: "20px",
-          letterSpacing: ".1px",
           fontWeight: "500",
         },
       ],
@@ -186,7 +173,6 @@ export default {
         "12px",
         {
           lineHeight: "16px",
-          letterSpacing: ".5px",
           fontWeight: "500",
         },
       ],
@@ -194,7 +180,6 @@ export default {
         "11px",
         {
           lineHeight: "16px",
-          letterSpacing: ".5px",
           fontWeight: "500",
         },
       ],
