@@ -12,6 +12,8 @@
 <div class="w-full">
   <Card type="elevated">
     <div class="min-h-[230px] grid gap-y-16 grid-rows-[auto_auto_1fr_auto]">
+      <!-- TODO: Implement placeholder titles when items don't have names -->
+      <!-- TODO: Handle large amounts of text (truncation?) -->
       <header class="text-headline-large">{name}</header>
       <p class="text-title-medium text-primary font-medium underline">
         {url}
@@ -22,6 +24,7 @@
       <div>
         <Button
           type="tonal"
+          disabled={!item.enabled}
           on:click={() => {
             window.location.href = url;
           }}
