@@ -76,9 +76,7 @@ function calculateFallbackSchedule(schedules: Schedule[]): Schedule | null {
 
   if (fallbackEnabledSchedules.length > 1) {
     // TODO: Add UI toast notification
-    console.warn(
-      "Multiple fallback schedules found. This is not recommended. Using the one with the highest priority."
-    );
+    console.warn("Multiple fallback schedules found. This is not recommended");
   }
 
   // Sort fallback enabled schedules by priority and return the first one

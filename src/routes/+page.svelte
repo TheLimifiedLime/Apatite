@@ -22,5 +22,5 @@
   </main>
 {:else}
   <!-- TODO: No fallback UI -->
-  <h1>No valid fallback schedules</h1>
+  <h1>No fallback schedules available</h1>
 {/if}
