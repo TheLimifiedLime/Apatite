@@ -59,7 +59,6 @@ function calculateScheduleItem(schedules: Schedule[]): ScheduleItem | null {
 
   // Warn if there are multiple valid schedule items for the current time
   if (validScheduleItems.length > 1) {
-    // TODO: Add UI toast notification
     console.warn(
       "Conflicting schedule items valid for the current time. This is not recommended. Using the first one."
     );
