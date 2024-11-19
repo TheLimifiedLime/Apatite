@@ -21,6 +21,11 @@
     {/each}
   </main>
 {:else}
-  <!-- TODO: No fallback UI -->
-  <h1>No fallback schedules available</h1>
+  <!-- TODO: Fallback UI -->
+  <main class="grid grid-cols-1 p-16 gap-y-16">
+    <h2 class="text-display-large text-center py-16">Apatite</h2>
+    <p class="text-display-small text-center text-on-surface-variant">
+      No fallback schedules available
+    </p>
+  </main>
 {/if}
