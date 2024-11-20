@@ -12,8 +12,10 @@
 </svelte:head>
 
 {#if fallback}
-  <main class="grid grid-cols-1 p-16 gap-y-16">
-    <h2 class="text-display-large text-center py-16">
+  <main
+    class="grid grid-cols-1 p-16 gap-y-16 medium:grid-cols-2 medium:gap-x-24 medium:px-24"
+  >
+    <h2 class="text-display-large text-center py-16 col-span-full">
       {fallback.name}
     </h2>
     {#each fallback.items as item}
