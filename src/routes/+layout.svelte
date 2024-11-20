@@ -5,8 +5,6 @@
   import { StyleFromScheme } from "m3-svelte";
 </script>
 
-{@render children()}
-
 <StyleFromScheme
   lightScheme={{
     primary: 4278217321,
@@ -87,3 +85,5 @@
     surfaceTint: 4286633427,
   }}
 />
+
+{@render children()}
