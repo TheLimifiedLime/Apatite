@@ -15,7 +15,7 @@
       <!-- TODO: Implement placeholder titles when items don't have names -->
       <!-- TODO: Handle large amounts of text (truncation?) -->
       <header class="text-headline-large">{name}</header>
-      <p class="text-title-medium text-primary font-medium underline">
+      <p class="text-title-medium text-primary font-medium">
         {url}
       </p>
       <p class="text-body-large">
