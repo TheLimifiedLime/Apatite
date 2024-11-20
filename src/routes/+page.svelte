@@ -21,11 +21,20 @@
     {/each}
   </main>
 {:else}
-  <!-- TODO: Fallback UI -->
-  <main class="grid grid-cols-1 p-16 gap-y-16">
+  <main
+    class="grid grid-cols-1 grid-rows-[auto_1fr] box-border h-lvh p-16 gap-y-16"
+  >
     <h2 class="text-display-large text-center py-16">Apatite</h2>
-    <p class="text-display-small text-center text-on-surface-variant">
-      No fallback schedules available
-    </p>
+    <div class="flex flex-col gap-y-16 place-self-center">
+      <p class="text-display-small text-center text-on-surface-variant">
+        No fallback schedules available
+      </p>
+      <a
+        class="text-headline-small text-center text-primary underline"
+        href="/configurator"
+      >
+        Open the configurator
+      </a>
+    </div>
   </main>
 {/if}
