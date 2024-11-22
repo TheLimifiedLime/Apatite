@@ -9,12 +9,11 @@ import {
 
 export const load: PageLoad = ({ url }) => {
   const config = fetchConfig(url.searchParams);
-
-  // If the fetcher finds no schedules, return null
   const schedules = fetchSchedules(url.searchParams);
+
   if (!schedules) return { config: config, fallback: null };
 
-  // If no schedules are found after filtering, return null
+  // Filter schedules
   const filteredSchedules = filter(schedules);
   if (!filteredSchedules)
     return {
@@ -22,9 +21,9 @@ export const load: PageLoad = ({ url }) => {
       fallback: calculateFallbackSchedule(schedules),
     };
 
-  // Determine if there is a schedule item to redirect to
+  // Get the schedule item to redirect to
   const scheduleItem = calculateScheduleItem(filteredSchedules);
-  if (!scheduleItem)
+  if (!scheduleItem || !config?.autoRedirect)
     return { config: config, fallback: calculateFallbackSchedule(schedules) };
 
   // Redirect to the schedule item's URL
