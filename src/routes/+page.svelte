@@ -33,7 +33,7 @@
       </p>
       <a
         class="text-headline-small text-center text-primary underline"
-        href="/configurator"
+        href="/config"
       >
         Open the configurator
       </a>
