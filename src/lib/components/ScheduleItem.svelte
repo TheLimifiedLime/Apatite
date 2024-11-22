@@ -11,8 +11,9 @@
 
 <div class="w-full">
   <Card type="elevated">
+    <!-- TODO: properly implement text breaking for more cases-->
     <div
-      class="min-h-[230px] grid gap-y-16 grid-rows-[auto_auto_1fr_auto] break-all hyphens-auto"
+      class="min-h-[230px] grid gap-y-16 grid-rows-[auto_auto_1fr_auto] break-words hyphens-auto"
     >
       <!-- TODO: Implement placeholder titles when items don't have names -->
       <header class="text-headline-large">{name}</header>
