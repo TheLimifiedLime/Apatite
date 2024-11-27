@@ -4,7 +4,7 @@ import { ConfigSchema, type Config } from "$lib/schema/config";
 function fetchConfig(urlParameters: URLSearchParams): Config | null {
   const configParameter = urlParameters.get("config");
 
-  if (!configParameter) return;
+  if (!configParameter) return ConfigSchema.parse({});
 
   let parsedConfig;
 
