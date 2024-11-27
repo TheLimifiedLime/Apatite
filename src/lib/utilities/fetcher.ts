@@ -14,7 +14,7 @@ function fetchConfig(urlParameters: URLSearchParams): Config | null {
     parsedConfig = JSON.parse(parsedConfig);
   } catch (error) {
     console.error("Failed to parse config.", error);
-    return;
+    return null;
   }
 
   // Validate the config against the schema
@@ -22,13 +22,11 @@ function fetchConfig(urlParameters: URLSearchParams): Config | null {
     return ConfigSchema.parse(parsedConfig);
   } catch (error) {
     console.error("Invalid config provided.", error);
-    return;
+    return null;
   }
 }
 
-function fetchSchedules(
-  urlParameters: URLSearchParams
-): Schedule[] | null {
+function fetchSchedules(urlParameters: URLSearchParams): Schedule[] | null {
   // Get value of "schedules" query parameter
   const schedulesParameter = urlParameters.get("schedules");
   if (!schedulesParameter) {
