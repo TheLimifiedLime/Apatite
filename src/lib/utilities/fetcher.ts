@@ -59,9 +59,7 @@ function fetchSchedules(urlParameters: URLSearchParams): Schedule[] | null {
         return null;
       }
     })
-    .filter(
-      (scheduleItem): scheduleItem is Schedule => scheduleItem !== undefined
-    );
+    .filter((scheduleItem): scheduleItem is Schedule => scheduleItem !== null);
 
   return parsedSchedules.length > 0 ? parsedSchedules : null;
 }
