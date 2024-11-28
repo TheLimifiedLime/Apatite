@@ -1,5 +1,6 @@
 import z from "zod";
 
+// TODO: Always return a default config object
 const ConfigSchema = z
   .object({
     autoRedirect: z
