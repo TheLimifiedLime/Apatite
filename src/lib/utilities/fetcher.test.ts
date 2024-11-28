@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { ConfigSchema, type Config } from "$lib/schema/config";
 import { ScheduleSchema, type Schedule } from "$lib/schema/schedule";
 import { fetchConfig, fetchSchedules } from "./fetcher";
@@ -18,6 +18,20 @@ describe("fetch config", () => {
     });
 
     expect(fetchConfig(mock)).toStrictEqual(data);
+    // TODO: have default config so null is not expected
+    expectTypeOf(fetchConfig(mock)).toMatchTypeOf<Config | null>();
+  });
+
+  it("fails to parse the config parameter", () => {
+    const data = {
+      autoRedirect: "yes",
+    };
+
+    const mock = new URLSearchParams({
+      config: `break-the${encodeURIComponent(JSON.stringify(data))}config`,
+    });
+
+    expect(fetchConfig(mock)).toBeNull();
   });
 
   it("provides a config when an empty object is passed", () => {
@@ -27,12 +41,16 @@ describe("fetch config", () => {
     });
 
     expect(fetchConfig(mock)).toStrictEqual(ConfigSchema.parse({}));
+    // TODO: have default config so null is not expected
+    expectTypeOf(fetchConfig(mock)).toMatchTypeOf<Config | null>();
   });
 
-  it("provides a config with default values when config url parameters are absent", () => {
+  it("provides a default config when config url parameter is absent", () => {
     const mock = new URLSearchParams();
 
     expect(fetchConfig(mock)).toStrictEqual(ConfigSchema.parse({}));
+    // TODO: have default config so null is not expected
+    expectTypeOf(fetchConfig(mock)).toMatchTypeOf<Config | null>();
   });
 
   it("parses a config error", () => {
@@ -44,7 +62,7 @@ describe("fetch config", () => {
       config: encodeURIComponent(JSON.stringify(data)),
     });
 
-    expect(fetchConfig(mock)).toStrictEqual(null);
+    expect(fetchConfig(mock)).toBeNull();
   });
 });
 
@@ -83,6 +101,79 @@ describe("fetch schedules", () => {
     });
 
     const expectedData = data.map((schedule) => ScheduleSchema.parse(schedule));
+
+    expect(fetchSchedules(mock)).toStrictEqual(expectedData);
+    expectTypeOf(fetchSchedules(mock)).toMatchTypeOf<Schedule[] | null>();
+  });
+
+  it("fails to parse the schedules parameter", () => {
+    const data = fixDates(
+      Array.from({ length: 5 }, () => generateMock(ScheduleSchema))
+    );
+
+    const mock = new URLSearchParams({
+      schedules: `break-the${encodeURIComponent(JSON.stringify(data))}config`,
+    });
+
+    expect(fetchSchedules(mock)).toBeNull();
+  });
+
+  it("fails to parse an array type schedules parameter", () => {
+    let data: any = fixDates(
+      Array.from({ length: 5 }, () => generateMock(ScheduleSchema))
+    );
+    // Purposely change the data from an array to an object
+    data = {
+      schedules: data,
+    };
+
+    const mock = new URLSearchParams({
+      schedules: encodeURIComponent(JSON.stringify(data)),
+    });
+
+    expect(fetchSchedules(mock)).toBeNull();
+  });
+
+  it("provides an error when schedule url parameter is absent", () => {
+    const mock = new URLSearchParams();
+
+    expect(fetchSchedules(mock)).toBeNull();
+  });
+
+  it("ends with no schedules after checks", () => {
+    const data = fixDates(
+      Array.from({ length: 1 }, () => generateMock(ScheduleSchema))
+    );
+    // Purposefully break the first schedule
+    data[0].fallback = "maybe" as unknown as boolean;
+
+    const mock = new URLSearchParams({
+      schedules: encodeURIComponent(JSON.stringify(data)),
+    });
+
+    expect(fetchSchedules(mock)).toBeNull();
+  });
+
+  it("parses a config error", () => {
+    const data = fixDates(
+      Array.from({ length: 5 }, () => generateMock(ScheduleSchema))
+    );
+    // Purposefully break the first schedule
+    data[0].fallback = "maybe" as unknown as boolean;
+
+    const mock = new URLSearchParams({
+      schedules: encodeURIComponent(JSON.stringify(data)),
+    });
+
+    const expectedData = data
+      .map((schedule, index) => {
+        // Set the first schedule to null (expected for a broken schedule)
+        if (index === 0) {
+          return null;
+        }
+        return ScheduleSchema.parse(schedule);
+      })
+      .filter((schedule) => schedule !== null);
 
     expect(fetchSchedules(mock)).toStrictEqual(expectedData);
   });
