@@ -12,6 +12,7 @@
     "test": "npm run test:unit -- --run"
   },
   "devDependencies": {
+    "@anatine/zod-mock": "^3.13.4",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
